@@ -1,0 +1,64 @@
+<div class="container">
+  <h2>Members List</h2>
+
+  <!-- Table to display members -->
+  <table mat-table [dataSource]="members" class="mat-elevation-z8">
+    <ng-container matColumnDef="index">
+      <th mat-header-cell *matHeaderCellDef>#</th>
+      <td mat-cell *matCellDef="let member; let i = index">{{ (currentPage - 1) * pageSize + i + 1 }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let member">{{ member.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="surname">
+      <th mat-header-cell *matHeaderCellDef>Surname</th>
+      <td mat-cell *matCellDef="let member">{{ member.surname }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let member">{{ member.email }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="dateOfBirth">
+      <th mat-header-cell *matHeaderCellDef>Date of Birth</th>
+      <td mat-cell *matCellDef="let member">{{ member.dateOfBirth }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="homeAddress">
+      <th mat-header-cell *matHeaderCellDef>Home Address</th>
+      <td mat-cell *matCellDef="let member">{{ member.homeAddress }}</td>
+    </ng-container>
+
+    <!-- Header Row -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+    <!-- Make the entire row clickable by adding the click event on <tr> -->
+    <tr mat-row *matRowDef="let member; columns: displayedColumns" (click)="onRowClick(member.id)" style="cursor: pointer;"></tr>
+  </table>
+
+  <!-- Custom Pagination -->
+  <div class="pagination-footer">
+    <div class="pagination-info">
+      <span>Showing page {{ currentPage }}</span>
+      <span> | Total Pages: {{ totalPages }}</span>
+    </div>
+
+    <div class="pagination-controls">
+      <button mat-button (click)="goToFirstPage()" [disabled]="currentPage === 1">First</button>
+      <button mat-button (click)="goToPreviousPage()" [disabled]="currentPage === 1">Previous</button>
+      <button mat-button (click)="goToNextPage()" [disabled]="currentPage === totalPages">Next</button>
+      <button mat-button (click)="goToLastPage()" [disabled]="currentPage === totalPages">Last</button>
+      <!-- Page size dropdown button -->
+      <button mat-button [matMenuTriggerFor]="pageSizeMenu">Results per page: {{ pageSize }}</button>
+      <mat-menu #pageSizeMenu="matMenu">
+        <button mat-menu-item *ngFor="let option of pageSizeOptions" (click)="onPageSizeChange(option)">
+          {{ option }}
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+</div>

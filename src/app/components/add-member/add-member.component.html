@@ -1,0 +1,68 @@
+<!-- add-member.component.html -->
+<div>
+  <h2>Add Member</h2>
+  <form [formGroup]="memberForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="name">Name</label>
+      <input id="name" formControlName="name" required />
+      <div *ngIf="memberForm.get('name')?.invalid && memberForm.get('name')?.touched">
+        <small class="error">Name is required</small>
+      </div>
+    </div>
+
+    <div>
+      <label for="surname">Surname</label>
+      <input id="surname" formControlName="surname" required />
+      <div *ngIf="memberForm.get('surname')?.invalid && memberForm.get('surname')?.touched">
+        <small class="error">Surname is required</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="dateOfBirth">Date of Birth:</label>
+      <input id="dateOfBirth" formControlName="dateOfBirth" type="date" />
+    </div>
+
+    <div class="form-group">
+      <label for="homeAddress">Home Address:</label>
+      <input id="homeAddress" formControlName="homeAddress" type="text" required />
+      <div *ngIf="memberForm.get('homeAddress')?.invalid && memberForm.get('homeAddress')?.touched">
+        Home address is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="city">City:</label>
+      <input id="city" formControlName="city" type="text" required />
+      <div *ngIf="memberForm.get('city')?.invalid && memberForm.get('city')?.touched">
+        City is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="zipCode">ZIP Code:</label>
+      <input id="zipCode" formControlName="zipCode" type="text" />
+      <div *ngIf="memberForm.get('zipCode')?.invalid && memberForm.get('zipCode')?.touched">
+        ZIP code must be 4 digits.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input id="email" formControlName="email" type="email" />
+      <div *ngIf="memberForm.get('email')?.invalid && memberForm.get('email')?.touched">
+        Please provide a valid email address.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="phoneNumber">Phone Number:</label>
+      <input id="phoneNumber" formControlName="phoneNumber" type="text" />
+      <div *ngIf="memberForm.get('phoneNumber')?.invalid && memberForm.get('phoneNumber')?.touched">
+        Phone number is invalid.
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="memberForm.invalid">Submit</button>
+  </form>
+</div>

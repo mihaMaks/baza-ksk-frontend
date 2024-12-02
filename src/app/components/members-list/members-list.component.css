@@ -1,0 +1,24 @@
+.pagination-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination-info {
+  font-size: 14px;
+}
+
+.pagination-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+button {
+  padding: 0 12px;
+}
+
+mat-menu {
+  min-width: 200px;
+}
