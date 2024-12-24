@@ -1,0 +1,46 @@
+/* Container that holds all sections */
+.container {
+  display: flex;
+  flex-wrap: wrap; /* Allow sections to wrap onto the next line */
+  gap: 20px; /* Space between sections */
+}
+
+/* Shared styles for sections */
+.section {
+  border: 1px solid #ccc;
+  padding: 20px;
+  background-color: #f9f9f9;
+  flex-grow: 1;
+}
+
+/* Member Data and Event Data will be side by side */
+.member-data, .event-data {
+  flex: 1; /* They will each take up 50% of the row */
+  min-width: 200px; /* Prevent them from becoming too small */
+}
+
+/* Certificate Data will span the full width, across the page */
+.certificate-data {
+  width: 100%; /* Takes full width of the container */
+  margin-top: 20px;
+}
+
+/* Add Certificate Button will be positioned between Event Data and Certificate Data */
+.add-certificate-button {
+  width: 100%; /* Full width */
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Optional button style */
+.add-certificate-button button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.add-certificate-button button:hover {
+  background-color: #0056b3;
+}

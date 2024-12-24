@@ -1,0 +1,38 @@
+<div class="form-container">
+  <h2 class="form-header">Add enrollment</h2>
+  <form [formGroup]="enrollmentForm" (ngSubmit)="onSubmit()" class="styled-form">
+    <div class="form-group">
+      <label for="university" class="form-label">University</label>
+      <input id="university" formControlName="university" class="form-input" required />
+      <div *ngIf="enrollmentForm.get('university')?.invalid && enrollmentForm.get('university')?.touched">
+        <small class="error">University is required</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="validFrom" class="form-label">Valid From</label>
+      <input id="validFrom" formControlName="validFrom" type="date" class="form-input" required />
+      <div *ngIf="enrollmentForm.get('validFrom')?.invalid && enrollmentForm.get('validFrom')?.touched">
+        <small class="error">Valid from date is required</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="validTo" class="form-label">Valid To</label>
+      <input id="validTo" formControlName="validTo" type="date" class="form-input" required />
+      <div *ngIf="enrollmentForm.get('validTo')?.invalid && enrollmentForm.get('validTo')?.touched">
+        <small class="error">Valid to date is required</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="pupilOrStudent" class="form-label">Pupil or Student</label>
+      <input id="pupilOrStudent" formControlName="pupilOrStudent" class="form-input" required />
+      <div *ngIf="enrollmentForm.get('pupilOrStudent')?.invalid && enrollmentForm.get('pupilOrStudent')?.touched">
+        <small class="error">This field is required</small>
+      </div>
+    </div>
+
+    <button type="submit" class="submit-button" [disabled]="enrollmentForm.invalid">Submit</button>
+  </form>
+</div>

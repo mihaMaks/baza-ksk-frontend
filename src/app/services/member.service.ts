@@ -69,4 +69,28 @@ export class MemberService {
   getEvents(memberId: number | undefined) {
     return this.http.get<any>(`${this.membersUrl}/${memberId}/events`);
   }
+  getEnrollments(memberId: number | undefined) {
+    return this.http.get<any>(`${this.membersUrl}/${memberId}/enrollments`);
+  }
+
+  addEnrollment(enrollmentData: any) {
+    console.log('Adding enrollment:', enrollmentData);
+    return this.http.post(`${this.membersUrl}/${enrollmentData.memberId}/enrollments`, enrollmentData);
+  }
+
+  getMemberFile(memberId: number) {
+    return this.http.get(`${this.membersUrl}/${memberId}/file`, { responseType: 'blob' });
+  }
+
+  getPendingPaginatedMembers(page: number, size: number, name: string, surname: string, email: string, pending: string): Observable<any> {
+    // Construct query parameters
+    const params = new HttpParams()
+      .set('page', page.toString())
+      .set('size', size.toString())
+      .set('name', name)
+      .set('surname', surname)
+      .set('email', email)
+      .set('pending', pending);
+    return this.http.get(`${this.membersUrl}/pending/paginated`, {params});
+  }
 }
