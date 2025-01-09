@@ -12,6 +12,7 @@ export class MemberService {
   private membersUrl = 'http://localhost:8080/v1/members'; // Backend API endpoint
   private eventsUrl = 'http://localhost:8080/v1/events';
   private  formUrl = 'http://localhost:8080/v1/entry-form';
+  private emailUrl = 'http://localhost:8080/v1/email/send';
 
   constructor(
     private http: HttpClient
@@ -56,8 +57,6 @@ export class MemberService {
         formData.append(key, member[key].toString());
       }
     }
-
-
     return this.http.post(this.formUrl, member);
   }
 
@@ -92,5 +91,9 @@ export class MemberService {
       .set('email', email)
       .set('pending', pending);
     return this.http.get(`${this.membersUrl}/pending/paginated`, {params});
+  }
+
+  sendEmail(emailRequest: any): Observable<any> {
+    return this.http.post(this.emailUrl, emailRequest);
   }
 }

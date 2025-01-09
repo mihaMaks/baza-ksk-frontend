@@ -68,6 +68,18 @@
       <input id="certificateFile" type="file" (change)="onFileSelected($event)" />
     </div>
 
+    <!-- Signature Canvas -->
+    <div class="form-group">
+      <label for="signature">Signature:</label>
+      <div class="signature-container">
+        <canvas #signaturePad width="400" height="200" style="border: 1px solid #000;"></canvas>
+        <button type="button" (click)="clearSignature()">Clear</button>
+      </div>
+    </div>
+
+
+
+
     <button type="submit" [disabled]="memberForm.invalid">Submit</button>
   </form>
 </div>

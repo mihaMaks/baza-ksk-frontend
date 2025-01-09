@@ -147,7 +147,7 @@ export class MemberComponent implements OnInit {
     }
   }
 
-
+// TO DO
   navigateToShowFiles(): void {
     const memberId = this.route.snapshot.paramMap.get('id');
 
