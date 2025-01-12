@@ -57,3 +57,21 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+ng build --configuration production      
+docker build -t maksmiha/baza-ksk-frontend:latest .
+
+docker buildx build --platform linux/amd64,linux/arm64 -t maksmiha/baza-ksk-frontend:latest . --push
+docker buildx build --platform linux/amd64,linux/arm64 -t maksmiha/baza-ksk-frontend:latest --push .
+
+kubectl apply -f frontend-deployment.yaml
+
+kubectl get pods
+kubectl get deployments
+kubectl get svc 
+
+
+/opt/homebrew/etc/nginx/nginx.conf to 8080 so that
+nginx can run without sudo.
+
+nginx will load all files in /opt/homebrew/etc/nginx/servers/.
+

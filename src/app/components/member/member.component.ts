@@ -79,8 +79,14 @@ export class MemberComponent implements OnInit {
   loadCertificateData(): void {
     if (this.memberId) {
       this.memberService.getEnrollments(this.memberId).subscribe(
-        data => {
-          this.enrollments = data;
+        (data) => {
+          if (typeof data === 'string') {
+            console.warn('Server returned plain text:', data);
+            // Handle the case when there are no enrollments
+            this.enrollments = [];
+          } else {
+            this.enrollments = data;
+          }
         },
         error => {
           console.error('Error fetching certificate data', error);
@@ -147,15 +153,29 @@ export class MemberComponent implements OnInit {
     }
   }
 
-// TO DO
+
   navigateToShowFiles(): void {
     const memberId = this.route.snapshot.paramMap.get('id');
 
     if (memberId) {
-      this.memberService.getMemberFile(+memberId).subscribe(
+      this.memberService.getMemberCertificate(+memberId).subscribe(
         (file: Blob) => {
           const fileURL = URL.createObjectURL(file);
           window.open(fileURL, '_blank'); // Open the file in a new tab
+        },
+        (error) => {
+          console.error('Error fetching file:', error);
+          alert('Error fetching file');
+        }
+      );
+      // entry form
+      this.memberService.getMemberEntryForm(+memberId).subscribe(
+        (file: Blob) => {
+          // Create a URL for the Blob file
+          const fileURL = URL.createObjectURL(file);
+
+          // Open the file in a new tab
+          window.open(fileURL, '_blank');
         },
         (error) => {
           console.error('Error fetching file:', error);
@@ -166,4 +186,26 @@ export class MemberComponent implements OnInit {
       console.error('Member ID not found in the route');
     }
   }
+
+  deleteMember(): void {
+    if (this.memberId) {
+      // Confirm the deletion
+      const confirmDelete = confirm('Are you sure you want to delete this member?');
+      if (confirmDelete) {
+        this.memberService.deleteMember(this.memberId).subscribe(
+          () => {
+            alert('Member deleted successfully.');
+            this.router.navigate(['/members']); // Navigate to members list or another appropriate route
+          },
+          error => {
+            console.error('Error deleting member:', error);
+            alert('An error occurred while trying to delete the member.');
+          }
+        );
+      }
+    } else {
+      console.error('Member ID is not available for deletion.');
+    }
+  }
+
 }

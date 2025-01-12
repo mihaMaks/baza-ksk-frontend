@@ -6,6 +6,9 @@ import { EntryFormComponent } from './components/entry-form/entry-form.component
 import { MemberComponent } from './components/member/member.component';
 import {AddEnrollmentComponent} from './components/add-enrollment/add-enrollment.component';
 import {ShowFilesComponent} from './components/show-files/show-files.component';
+import {EventsListComponent} from './components/event-list/event-list.component';
+import {EventComponent} from './components/event/event.component';
+import {AddEventComponent} from './components/add-event/add-event.component';
 
 export const routes: Routes = [
   {
@@ -42,6 +45,21 @@ export const routes: Routes = [
     path: 'members/:id/show-files',
     title: 'member files',
     component:  ShowFilesComponent
+  },
+  {
+    path: 'events',
+    title: 'Events List',
+    component:  EventsListComponent
+  },
+  {
+    path: 'events/:id',
+    title: 'event info page',
+    component:  EventComponent
+  },
+  {
+    path: 'add-event',
+    title: 'event form page',
+    component:  AddEventComponent
   }
 
 ];

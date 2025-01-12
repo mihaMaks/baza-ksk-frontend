@@ -10,9 +10,9 @@ import { catchError, map, tap } from 'rxjs/operators';
 })
 export class MemberService {
   private membersUrl = 'http://localhost:8080/v1/members'; // Backend API endpoint
-  private eventsUrl = 'http://localhost:8080/v1/events';
-  private  formUrl = 'http://localhost:8080/v1/entry-form';
-  private emailUrl = 'http://localhost:8080/v1/email/send';
+  private eventsUrl = 'http://localhost:8081/v1/events';
+  private  formUrl = 'http://localhost:9090/v1/entry-form';
+  private emailUrl = 'http://localhost:9091/v1/email/send';
 
   constructor(
     private http: HttpClient
@@ -77,9 +77,13 @@ export class MemberService {
     return this.http.post(`${this.membersUrl}/${enrollmentData.memberId}/enrollments`, enrollmentData);
   }
 
-  getMemberFile(memberId: number) {
-    return this.http.get(`${this.membersUrl}/${memberId}/file`, { responseType: 'blob' });
+  getMemberCertificate(memberId: number) {
+    return this.http.get(`${this.membersUrl}/${memberId}/certificate`, { responseType: 'blob' });
   }
+  getMemberEntryForm(memberId: number): Observable<Blob> {
+    return this.http.get(`${this.membersUrl}/${memberId}/entry-form`, { responseType: 'blob' });
+  }
+
 
   getPendingPaginatedMembers(page: number, size: number, name: string, surname: string, email: string, pending: string): Observable<any> {
     // Construct query parameters
@@ -95,5 +99,10 @@ export class MemberService {
 
   sendEmail(emailRequest: any): Observable<any> {
     return this.http.post(this.emailUrl, emailRequest);
+  }
+
+  deleteMember(memberId: number): Observable<void> {
+    const url = `${this.membersUrl}/${memberId}`;
+    return this.http.delete<void>(url, { responseType: 'text' as 'json' });
   }
 }

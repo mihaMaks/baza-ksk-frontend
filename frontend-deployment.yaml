@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: baza-ksk-frontend
+spec:
+  replicas: 1  # You can adjust the number of replicas based on your needs
+  selector:
+    matchLabels:
+      app: baza-ksk-frontend
+  template:
+    metadata:
+      labels:
+        app: baza-ksk-frontend
+    spec:
+      containers:
+        - name: baza-ksk-frontend
+          image: maksmiha/baza-ksk-frontend:latest
+          ports:
+            - containerPort: 80  # Change this if your app listens on a different port
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: baza-ksk-frontend-service
+spec:
+  selector:
+    app: baza-ksk-frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80  # This should match the containerPort in your Deployment
+  type: LoadBalancer  # Change to NodePort if you don't want a LoadBalancer

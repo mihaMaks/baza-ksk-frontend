@@ -1,0 +1,38 @@
+<div>
+  <h2>Add Event</h2>
+  <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="name">Event Name</label>
+      <input id="name" formControlName="name" required />
+      <div *ngIf="eventForm.get('name')?.invalid && eventForm.get('name')?.touched">
+        <small class="error">Event name is required</small>
+      </div>
+    </div>
+
+    <div>
+      <label for="place">Place</label>
+      <input id="place" formControlName="place" required />
+      <div *ngIf="eventForm.get('place')?.invalid && eventForm.get('place')?.touched">
+        <small class="error">Place is required</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="starts">Start Date and Time:</label>
+      <input id="starts" formControlName="starts" type="datetime-local" required />
+      <div *ngIf="eventForm.get('starts')?.invalid && eventForm.get('starts')?.touched">
+        <small class="error">Start date and time is required</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="ends">End Date and Time:</label>
+      <input id="ends" formControlName="ends" type="datetime-local" required />
+      <div *ngIf="eventForm.get('ends')?.invalid && eventForm.get('ends')?.touched">
+        <small class="error">End date and time is required</small>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="eventForm.invalid">Submit</button>
+  </form>
+</div>
